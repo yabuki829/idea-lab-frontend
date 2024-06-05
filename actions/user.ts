@@ -102,3 +102,75 @@ export const completeSignup = async ({ uid, token }: CompleteSignupProps) => {
 
   return { success: true }
 }
+
+interface ResetPasswordProps {
+  uid: string
+  token: string
+  newPassword: string
+  reNewPassword: string
+}
+interface ForgotPasswordProps {
+  email: string
+}
+
+// パスワード再設定
+export const forgotPassword = async ({ email }: ForgotPasswordProps) => {
+  const body = JSON.stringify({
+    email,
+  })
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body,
+  }
+
+  // パスワード再設定を送信
+  const result = await fetchAPI("/api/auth/users/reset_password/", options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false }
+  }
+
+  return { success: true }
+}
+
+
+// パスワード再設定確認
+export const resetPassword = async ({
+  uid,
+  token,
+  newPassword,
+  reNewPassword,
+}: ResetPasswordProps) => {
+  const body = JSON.stringify({
+    uid,
+    token,
+    new_password: newPassword,
+    re_new_password: reNewPassword,
+  })
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body,
+  }
+
+  // パスワード再設定確認を送信
+  const result = await fetchAPI(
+    "/api/auth/users/reset_password_confirm/",
+    options
+  )
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false }
+  }
+
+  return { success: true }
+}
