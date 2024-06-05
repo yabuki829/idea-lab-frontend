@@ -174,3 +174,40 @@ export const resetPassword = async ({
 
   return { success: true }
 }
+
+
+export interface UserDetailType {
+  uid: string
+  name: string
+  email: string
+  image: string | undefined
+  introduction: string
+  created_at: string
+}
+
+interface GetUserDetailProps {
+  userId: string
+}
+
+// ユーザー詳細取得
+export const getUserDetail = async ({ userId }: GetUserDetailProps) => {
+  const options: RequestInit = {
+    method: "GET",
+    // 最新のデータが取得できる
+    cache: "no-store",
+  }
+
+  // APIからユーザー詳細を取得
+  const result = await fetchAPI(`/accounts/users/${userId}/`, options)
+  console.log("1")
+  if (!result.success) {
+    console.log("2")
+    console.error(result.error)
+    return { success: false, user: null }
+  }
+  console.log("3")
+
+  const user: UserDetailType = result.data
+
+  return { success: true, user }
+}

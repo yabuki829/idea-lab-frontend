@@ -26,6 +26,8 @@ export interface UserType {
   uid: string
   name: string
   email: string
+  image: string | undefined
+  introduction: string
 }
 
 // 共通のAPIリクエスト
