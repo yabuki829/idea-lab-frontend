@@ -3,7 +3,7 @@ import Image from "next/image";
 const Home = () => {
   return (
     <div>
-      <div>ホーム画面</div>
+      <div>アイデアを考えよう！</div>
     </div>
   )
 }

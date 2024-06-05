@@ -2,6 +2,10 @@ import { getServerSession, type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import type { JWT } from "next-auth/jwt"
 
+
+// 認証が通らない500エラー出る場合は
+// urlが合っているかまず確かめる
+
 // NextAuthとJWTの型を拡張してアクセストークンとリフレッシュトークンを含める
 declare module "next-auth" {
   interface Session {
@@ -128,6 +132,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       // アクセストークンの検証
+      // 認証が通らなければrefreshAccessTokenを呼び出しアクセストークンを更新する
       if (await verifyAccessToken(token)) {
         return token
       }
@@ -143,7 +148,9 @@ export const authOptions: NextAuthOptions = {
   },
 }
 
-// 認証情報取得
+
+
+// サーバから認証情報取得
 export const getAuthSession = async () => {
   const session = await getServerSession(authOptions)
 
@@ -152,6 +159,7 @@ export const getAuthSession = async () => {
   }
 
   // ユーザー情報を取得
+
   const user = await fetchAPI("/api/auth/users/me/", {
     method: "GET",
     headers: {
