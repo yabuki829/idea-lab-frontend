@@ -21,7 +21,6 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
       </div>
     )
   }
-
   if (!user) {
     return (
       <div className="text-center text-sm text-gray-500">

@@ -211,3 +211,88 @@ export const getUserDetail = async ({ userId }: GetUserDetailProps) => {
 
   return { success: true, user }
 }
+
+interface UpdateUserProps {
+  accessToken: string
+  name: string
+  introduction: string | undefined
+  avatar: string | undefined
+}
+
+// プロフィール編集
+export const updateUser = async ({
+  accessToken,
+  name,
+  introduction,
+  avatar,
+}: UpdateUserProps) => {
+  const body = JSON.stringify({
+    name,
+    introduction,
+    avatar,
+  })
+
+  const options = {
+    method: "PATCH",
+    headers: {
+      Authorization: `JWT ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body,
+  }
+
+  // プロフィール編集を送信
+  const result = await fetchAPI("/api/auth/users/me/", options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false, user: null }
+  }
+
+  const user: UserDetailType = result.data
+
+  return { success: true, user }
+}
+
+
+
+
+interface UpdatePasswordProps {
+  accessToken: string
+  currentPassword: string
+  newPassword: string
+  reNewPassword: string
+}
+
+// パスワード変更する
+export const updatePassword = async ({
+  accessToken,
+  currentPassword,
+  newPassword,
+  reNewPassword,
+}: UpdatePasswordProps) => {
+  const body = JSON.stringify({
+    current_password: currentPassword,
+    new_password: newPassword,
+    re_new_password: reNewPassword,
+  })
+
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: `JWT ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body,
+  }
+
+  // パスワード変更を送信
+  const result = await fetchAPI("/api/auth/users/set_password/", options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false }
+  }
+
+  return { success: true }
+}
