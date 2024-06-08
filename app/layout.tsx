@@ -10,7 +10,7 @@ import ToastProvider from "@/components/providers/ToastProvider"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "アイデアlab",
+  title: "アイデア研究所",
   description: "サービスやゲームなどのアイデアを自動で考えます。",
 };
 
@@ -28,10 +28,12 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         <div className="flex min-h-screen flex-col">
           <Navigation user={user} />
           <ToastProvider/>
-          <main className="container mx-auto max-w-screen-md flex-1 px-2">
+          {/* サイドにスペースがいる場合それぞれのpage.tsxでやる */}
+          {/* <main className=" px-10"> */}
+          <main className="">
             {children}
           </main>
-
+        
           {/* フッター */}
           <footer className="py-5">
             <div className="text-center text-sm">
