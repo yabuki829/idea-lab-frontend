@@ -41,6 +41,11 @@ const UserNavigation = ( { user }: UserNavigationProps ) => {
                 </Link>
 
                 <DropdownMenuSeparator />
+                <Link href="/create/ideas">
+                    <DropdownMenuItem className="cursor-pointer">
+                        アイデア生成
+                    </DropdownMenuItem>
+                </Link>
 
                 <Link href="/post/new">
                     <DropdownMenuItem className="cursor-pointer">

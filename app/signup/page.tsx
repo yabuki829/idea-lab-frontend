@@ -12,7 +12,7 @@ const SignupPage = async () => {
       redirect("/")
     }
   
-    return <Signup/>
+    return <div className="p-5 md:p-10"><Signup/></div>
   }
   
   export default SignupPage

@@ -10,7 +10,7 @@ const LoginPage = async () => {
     if (user) {
         redirect("/")
     }
-  return <Login/>
+  return <div className='p-5 md:p-10'><Login/></div>
 }
 
 export default LoginPage

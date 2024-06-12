@@ -1,13 +1,9 @@
 "use server"
 const fetchAPI = async (url: string, options: RequestInit) => {
-  const apiUrl = process.env.API_URL
-
-  if (!apiUrl) {
-    return { success: false, error: "API URLが設定されていません" }
-  }
-
+  const backendUrl = process.env.API_URL
   try {
-    const response = await fetch(`${apiUrl}${url}`, options)
+    console.log(backendUrl,url)
+    const response = await fetch(`${backendUrl}${url}`, options)
 
     if (!response.ok) {
       return { success: false, error: "APIでエラーが発生しました" }

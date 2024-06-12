@@ -29,7 +29,7 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
     )
   }
   
-  return <UserDetail user={user} />
+  return <div className="p-5 md:p-10"><UserDetail user={user} /></div>
 }
 
 export default UserDetailPage

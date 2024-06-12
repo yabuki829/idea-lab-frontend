@@ -1,10 +1,10 @@
 import AnimationText from "@/components/ui/animationText";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
+import Link from "next/link"
 const Home = () => {
   return (
-    <div className="bg-gradient-to-t from-indigo-100 px-2 ">
+    <div className="bg-gradient-to-t from-indigo-100 px-5 md:px-10 ">
       <div>
         <div className="flex items-center  mx-auto ">
         <h1 className="text-4xl md:text-8xl font-bold vertical-text">
@@ -13,7 +13,7 @@ const Home = () => {
           <img src="/lab.png" alt="top-1" className="w-3/4 mx-auto" />
           
         </div>
-        <h1 className="font-bold text-4xl">機能</h1>
+        <h1 className="font-bold text-4xl"></h1>
         <div className="md:flex justify-between">
            <div className="mx-2">
            <Image src="/top-1.png" alt="top-1" width={500} height={300} />
@@ -29,8 +29,17 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center py-32 md:py-48">
-        <Button className="bg-blue-500 hover:bg-blue-300">ログインしてアイデアを作成する</Button>
+      <br />
+      <div>
+        <div>
+          
+        </div>
+        <div>
+          
+        </div>
+        <div>
+          
+        </div>
       </div>
     </div>
   )

@@ -20,7 +20,7 @@ const ResetPasswordPage = async ({ params }: ResetPasswordProps) => {
     redirect("/")
   }
 
-  return <ResetPassword uid={uid} token={token} />
+  return <div className="p-5 md:p-10"><ResetPassword uid={uid} token={token} /></div>
 }
 
 export default ResetPasswordPage

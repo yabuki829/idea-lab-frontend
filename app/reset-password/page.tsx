@@ -11,7 +11,7 @@ const ForgotPasswordPage = async () => {
     redirect("/")
   }
 
-  return <ForgotPassword />
+  return <div className="p-5 md:p-10"><ForgotPassword /></div>
 }
 
 export default ForgotPasswordPage

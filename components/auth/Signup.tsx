@@ -20,6 +20,8 @@ import toast from "react-hot-toast"
 import Link from "next/link"
 import { temporarrySingup } from "@/actions/user"
 
+
+
 // form のルールを定義
 const schema = z.object({
     name: z.string().min(2,{message:"2文字以上入力する必要があります。"}),
@@ -46,7 +48,7 @@ export const Signup = () => {
 
     // ボタンを押した時の処理を行う
     const onSubmit: SubmitHandler<InputType> = async (data) => {
-      console.log("仮登録を行います１")
+      // console.log("仮登録を行います１")
         setIsLoading(true)
         try {
             // アカウント仮登録
@@ -59,7 +61,6 @@ export const Signup = () => {
             })
       
             if (!res.success) {
-              console.log("失敗しました1。")
               toast.error("サインアップに失敗しました")
               if (res.error) {
                 console.error("Signup error:", res.error); 
@@ -75,6 +76,8 @@ export const Signup = () => {
             setIsLoading(false)
           }
     }
+
+
     return (
         <div className="max-w-[400px] m-auto">
         {isSignUp ? (
