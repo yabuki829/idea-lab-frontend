@@ -66,7 +66,7 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
                 }
                 console.log(res.post)
                 toast.success("投稿しました")
-                router.push(`/post/${res.post.id}`)
+                router.push(`/idea/${res.post.id}`)
                 router.refresh()
                         
             } catch (error) {

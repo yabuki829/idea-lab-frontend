@@ -33,6 +33,7 @@ export interface IdeaType {
     id: string
     user: UserType
     title: string
+    tag:string
     description: string
     updated_at: string
     created_at: string
@@ -83,6 +84,36 @@ export const postIdea = async ({
 
     return { success: true, post }
     
+}
+// アイデアの詳細の取得
+// 引数: ideaId
+
+export const getIdeaDetail = async ({ ideaId }: { ideaId: string }) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+  }
+
+  // 投稿詳細取得
+  const result = await fetchAPI(`/api/idea-detail/${ideaId}/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false, idea: null }
+  }
+  const idea: IdeaType = result.data
+
+  return { success: true, idea }
+}
+
+
+// 一覧を取得する
+export const getIdeaList = async ({ ideaId }: { ideaId: string }) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+  }
+
 }
 
 
