@@ -108,16 +108,26 @@ export const getIdeaDetail = async ({ ideaId }: { ideaId: string }) => {
 
 
 // 一覧を取得する
-export const getIdeaList = async ({ ideaId }: { ideaId: string }) => {
+export const getIdeaList = async () => {
   const options: RequestInit = {
     method: "GET",
     cache: "no-store",
   }
+  const result = await fetchAPI(`/api/idea-list/`, options)
+  
+  if (!result.success) {
+    console.error(result.error)
+    
+    return { success: false, ideas: null }
+  }
 
+  const ideas: [IdeaType] = result.data
+  return { success: true, ideas }
 }
 
 
 // アイデアの自動生成
 
 interface createIdeaWithAIType {
+
 }

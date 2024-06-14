@@ -14,9 +14,7 @@ const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
   
   return (
     <div className="md:w-1/2 mx-auto">
-
         <div>
-          
           <h1 className="font-bold text-2xl md:text-4xl ">{idea?.title}</h1>  
           <p className="text-gray-500">投稿日 {idea?.created_at}</p>
           <hr />
