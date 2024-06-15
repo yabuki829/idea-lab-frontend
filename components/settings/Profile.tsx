@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { useForm, SubmitHandler } from "react-hook-form"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
@@ -39,7 +40,7 @@ interface ProfileProps {
 // プロフィール
 const Profile = ({ user }: ProfileProps) => {
   const router = useRouter()
-  const [avatarUpload, setAvatarUpload] = useState<ImageListType>([
+  const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
       dataURL: user.image || "/default.png",
     },
@@ -63,10 +64,10 @@ const Profile = ({ user }: ProfileProps) => {
     let base64Image
 
     if (
-      avatarUpload[0].dataURL &&
-      avatarUpload[0].dataURL.startsWith("data:image")
+      imageUpload[0].dataURL &&
+      imageUpload[0].dataURL.startsWith("data:image")
     ) {
-      base64Image = avatarUpload[0].dataURL
+      base64Image = imageUpload[0].dataURL
     }
 
     try {
@@ -75,7 +76,7 @@ const Profile = ({ user }: ProfileProps) => {
         accessToken: user.accessToken,
         name: data.name,
         introduction: data.introduction,
-        avatar: base64Image,
+        image: base64Image,
       })
 
       if (!res.success) {
@@ -89,6 +90,8 @@ const Profile = ({ user }: ProfileProps) => {
       toast.error("プロフィールの編集に失敗しました")
     } finally {
       setIsLoading(false)
+      router.push(`/user/${user.uid}`)
+      router.refresh()
     }
   }
 
@@ -103,7 +106,7 @@ const Profile = ({ user }: ProfileProps) => {
       return
     }
 
-    setAvatarUpload(imageList)
+    setImageUpload(imageList)
   }
 
   return (
@@ -113,7 +116,7 @@ const Profile = ({ user }: ProfileProps) => {
       <Form {...form}>
         <div className="mb-5">
           <ImageUploading
-            value={avatarUpload}
+            value={imageUpload}
             onChange={onChangeImage}
             maxNumber={1}
             acceptType={["jpg", "png", "jpeg"]}

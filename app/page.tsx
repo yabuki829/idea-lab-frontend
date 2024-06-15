@@ -11,15 +11,10 @@ import { getIdeaList } from "@/actions/idea"
 const HomePage = async () => {
   
     const user = await getAuthSession()
-  
-    // if (!user) {
-    //   redirect("/login")
-    // }
-    
-    // ここで一覧を取得する
-    // 一覧表示だけはログインしなくても見れるようにする？
+
     
     const {success,ideas} = await getIdeaList() 
+  
     if (!success) {
       return (
       <div className="p-10">
@@ -27,7 +22,7 @@ const HomePage = async () => {
       
       </div>)
     }
-    if (ideas == null) {
+    if (ideas?.length == 0) {
       return (
         <div className="p-10">
           <p className="text-center ">表示できるアイデアがありません</p>
@@ -35,9 +30,10 @@ const HomePage = async () => {
         </div>
       )
     }
+
+
     return (
       <div className="p-5 md:p-10">
-      
         <ListIdeas ideas={ideas} user={user}/>
       </div>
     )

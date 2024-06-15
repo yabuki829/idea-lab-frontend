@@ -27,7 +27,7 @@ const CompleteSignupPage = async ({ params }: CompleteSignupPageProps) => {
 
   if (res.success) {
     return (
-      <div className="max-w-[400px] m-auto text-center">
+      <div className="max-w-[400px] m-auto text-center p-5 md:p-10">
         <div className="text-2xl font-bold mb-10">本登録完了</div>
         <div>アカウント本登録が完了しました</div>
         <div className="mb-5">ログインしてください</div>

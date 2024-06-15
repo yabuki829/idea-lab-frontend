@@ -212,7 +212,7 @@ interface UpdateUserProps {
   accessToken: string
   name: string
   introduction: string | undefined
-  avatar: string | undefined
+  image: string | undefined
 }
 
 // プロフィール編集
@@ -220,12 +220,12 @@ export const updateUser = async ({
   accessToken,
   name,
   introduction,
-  avatar,
+  image,
 }: UpdateUserProps) => {
   const body = JSON.stringify({
     name,
     introduction,
-    avatar,
+    image,
   })
 
   const options = {
