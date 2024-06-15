@@ -6,7 +6,8 @@ const fetchAPI = async (url: string, options: RequestInit) => {
   const backendUrl = process.env.API_URL
 
   try {
-    console.log(backendUrl,url)
+    console.log(backendUrl,)
+    console.log(url)
     const response = await fetch(`${backendUrl}${url}`, options)
 
     if (!response.ok) {
@@ -92,10 +93,11 @@ export const getIdeaDetail = async ({ ideaId }: { ideaId: string }) => {
   const options: RequestInit = {
     method: "GET",
     cache: "no-store",
+    
   }
 
   // 投稿詳細取得
-  const result = await fetchAPI(`/api/idea-detail/${ideaId}/`, options)
+  const result = await fetchAPI(`/api/idea/${ideaId}/`, options)
 
   if (!result.success) {
     console.error(result.error)
@@ -112,8 +114,9 @@ export const getIdeaList = async () => {
   const options: RequestInit = {
     method: "GET",
     cache: "no-store",
+    
   }
-  const result = await fetchAPI(`/api/idea-list/`, options)
+  const result = await fetchAPI(`/api/idea/list/`, options)
   
   if (!result.success) {
     console.error(result.error)
@@ -128,6 +131,39 @@ export const getIdeaList = async () => {
 
 // アイデアの自動生成
 
-interface createIdeaWithAIType {
+interface CreateIdeaWithAIType {
 
+  title: string
+  description:string
+}
+
+interface PostCreateIdeaWithAIType {
+  accessToken: string
+  word:string
+}
+
+export const getGenerateIdea = async ({accessToken,word}:PostCreateIdeaWithAIType) => {
+
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: `JWT ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ word }),
+  }
+
+  
+  const result = await fetchAPI(`/api/generate/idea/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    
+    return { success: false, idea: null }
+  }
+
+
+  const idea: CreateIdeaWithAIType = result.data
+
+  return { success: true, idea }
 }

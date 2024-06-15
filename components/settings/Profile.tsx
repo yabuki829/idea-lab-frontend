@@ -110,7 +110,7 @@ const Profile = ({ user }: ProfileProps) => {
   }
 
   return (
-    <div>
+    <div className="bg-white p-5 rounded-md">
       <div className="text-xl font-bold text-center mb-5">プロフィール</div>
 
       <Form {...form}>

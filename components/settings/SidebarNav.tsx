@@ -11,10 +11,10 @@ const items = [
     title: "プロフィール",
     href: "/settings/profile",
   },
-//   {
-//     title: "パスワード変更",
-//     href: "/settings/password",
-//   },
+  {
+    title: "パスワード変更(comming soon)",
+    href: "",
+  },
 ]
 
 // サイドナビゲーション
@@ -28,11 +28,9 @@ const SidebarNav = () => {
           key={item.href}
           href={item.href}
           className={cn(
-            buttonVariants({ variant: "ghost" }),
-            pathname === item.href
-              ? "bg-muted hover:bg-muted"
-              : "hover:bg-transparent hover:underline",
-            "justify-start"
+            buttonVariants({ variant: "default" }),
+          
+            "justify-start bg-white  text-black hover:bg-gray-50"
           )}
         >
           {item.title}

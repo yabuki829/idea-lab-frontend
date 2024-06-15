@@ -19,18 +19,26 @@ import { Loader2 } from "lucide-react"
 import toast from "react-hot-toast"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { postIdea } from "@/actions/idea"
+import { getGenerateIdea, postIdea } from "@/actions/idea"
 import { UserType } from "@/lib/nextauth"
 import Loading from "@/app/loading"
+
 // form のルールを定義
 const schema = z.object({
     title: z.string().min(2,{message:"タイトルは2文字以上以内で入力してください"}).max(255,{message:"タイトルは255文字以内で入力してください"}),
     tag:z.string().min(1,{message:"タグは1文字以上以内で入力してください"}).max(30,{message:"タイトルは30文字以内で入力してください"}),
-    description: z.string().min(2,{message:"アイデアは2文字以上で入力してください"}).max(255,"255文字以内で入力してください"),
+    description: z.string().min(2,{message:"アイデアは2文字以上で入力してください"}),
+})
+
+
+const schema_2 = z.object({
+  idea: z.string().min(1,{message:"単語は1文字以上で入力してください"}).max(30,{message:"単語は30文字以内で入力してください"}),
+  
 })
 
 // formの型を定義する
 type InputType = z.infer<typeof schema>
+type IdeaCreateInputType = z.infer<typeof schema_2>
 
 interface PostIdeaProps {
     user: UserType
@@ -48,6 +56,14 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
             description:""
         }
     })
+
+  const ideaCreateForm = useForm<IdeaCreateInputType>({
+      resolver: zodResolver(schema_2),
+      defaultValues: {
+       idea: ""
+      }
+  })
+
     const onSubmit: SubmitHandler<InputType> = async (data) => {
         console.log("投稿する")
           setIsLoading(true)
@@ -77,11 +93,32 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
               setIsLoading(false)
             }
       }
+
+      // 自動生成
+      const handleAutoGenerateClick: SubmitHandler<IdeaCreateInputType> = async (data) => {
+        setIsLoading(true)
+        // 自動生成して取得できたものを登録する
+
+        const  {success, idea} = await getGenerateIdea({
+          accessToken: user.accessToken,
+          word:data.idea
+        })
+        if (success) {
+          form.setValue("title", idea?.title ?? "" )
+          form.setValue("tag", "アイデア" ?? "テスト")
+          form.setValue("description", idea?.description ?? "取得できてない")
+        }
+      
+        setIsLoading(false)
+        
+      }
   return (
     <>
-             {isLoading ? (
+      {isLoading ? (
           <>
+            
             <Loading/>
+            <p className="text-center">生成中ですしばらくお待ちください</p>
           </>) : (
             <div className="md:w-1/2 mx-auto bg-white rounded-md p-5">
           <Form {...form}>
@@ -129,7 +166,39 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
                 </div>
               </form>
         </Form>
+
+        
          </div>)}
+         <div className="w-1/2 mx-auto">
+          <div className="pt-3">
+            <p className="text-center " >※自動生成できるのは現在１日一回のみです</p>
+            
+
+            <Form {...ideaCreateForm}>
+            <form onSubmit={ideaCreateForm.handleSubmit(handleAutoGenerateClick)} className="space-y-5">
+              <FormField
+                name="idea"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="単語を入力してください" {...field} className="bg-white" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-center py-5">
+                <button disabled={isLoading} type="submit" className="px-2 py-1 bg-green-300">
+                  自動生成
+                </button>
+              </div>
+            </form>
+          </Form>
+            
+          </div>
+         </div>
+         
+       
     </>
    
 
