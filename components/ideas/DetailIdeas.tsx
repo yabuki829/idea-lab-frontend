@@ -13,7 +13,7 @@ const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
   const [isLoading, setIsLoading] = useState(false)
   
   return (
-    <div className="md:w-1/2 mx-auto">
+    <div className="md:w-2/3 mx-auto bg-white  rounded-md p-5  md:p-10">
         <div>
           <h1 className="font-bold text-2xl md:text-4xl ">{idea?.title}</h1>  
           <p className="text-gray-500">投稿日 {idea?.created_at}</p>

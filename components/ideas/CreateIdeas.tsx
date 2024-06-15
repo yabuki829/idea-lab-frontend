@@ -21,6 +21,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { postIdea } from "@/actions/idea"
 import { UserType } from "@/lib/nextauth"
+import Loading from "@/app/loading"
 // form のルールを定義
 const schema = z.object({
     title: z.string().min(2,{message:"タイトルは2文字以上以内で入力してください"}).max(255,{message:"タイトルは255文字以内で入力してください"}),
@@ -42,8 +43,8 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
     const form = useForm<InputType>({
         resolver: zodResolver(schema),
         defaultValues: {
-            title:"No Title",
-            tag:"",
+            title:"",
+            tag:"アイデア",
             description:""
         }
     })
@@ -77,9 +78,13 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
             }
       }
   return (
-    <div className="md:w-1/2 mx-auto">
-       
-        <Form {...form}>
+    <>
+             {isLoading ? (
+          <>
+            <Loading/>
+          </>) : (
+            <div className="md:w-1/2 mx-auto bg-white rounded-md p-5">
+          <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                 <FormField
                   name="title"
@@ -116,11 +121,6 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
                     </FormItem>
                   )}
                 />
-  
-                
-  
-              
-  
                 <div className="flex justify-center">
                     <Button disabled={isLoading} type="submit" className=" bg-blue-400 hover:bg-blue-300">
                     {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -129,8 +129,12 @@ const CreateIdeas =  ({ user }: PostIdeaProps) =>  {
                 </div>
               </form>
         </Form>
+         </div>)}
+    </>
+   
+
+        
        
-    </div>
   )
 }
 

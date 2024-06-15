@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 const Home = () => {
   return (
-    <div className="bg-gradient-to-t from-indigo-100 px-5 md:px-10 ">
+    <div className=" bg-gradient-to-t from-indigo-100 px-5 md:px-10 ">
       <div>
         <div className="flex items-center  mx-auto ">
         <h1 className="text-4xl md:text-8xl font-bold vertical-text">

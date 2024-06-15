@@ -41,7 +41,7 @@ const DetailsIdeaPage = async ({ params }: PostDetailPageProps) => {
     
     
     return (
-      <div className="p-5 md:p-10">
+      <div className="p-5 md:p-10 ">
         
           <DetailsIdeas idea={idea} user={user}/>
         

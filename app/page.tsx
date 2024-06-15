@@ -33,7 +33,7 @@ const HomePage = async () => {
 
 
     return (
-      <div className="p-5 md:p-10">
+      <div className=" md:p-10">
         <ListIdeas ideas={ideas} user={user}/>
       </div>
     )

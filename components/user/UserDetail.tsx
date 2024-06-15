@@ -9,7 +9,8 @@ interface UserDetailProps {
 
 const UserDetail = ({ user }: UserDetailProps) => {
   return (
-    <div className="flex  space-x-4"> 
+    <div className="md:w-1/2 mx-auto bg-white p-5 rounded-md">
+          <div className="flex  space-x-4"> 
       
       <div className="relative w-28 h-28 flex-shrink-0">
         <Image
@@ -29,6 +30,8 @@ const UserDetail = ({ user }: UserDetailProps) => {
       </div>
       
     </div>
+    </div>
+
   )
 }
 

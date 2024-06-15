@@ -27,7 +27,7 @@ const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
             {ideas?.map((idea) => (
             <div 
                 key={idea.id} 
-                className="mb-4 cursor-pointer  p-4 "
+                className=" cursor-pointer  bg-white p-5 "
                 onClick={() => handleDetailClick(idea.id)}
             >
             

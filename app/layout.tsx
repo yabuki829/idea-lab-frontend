@@ -25,12 +25,12 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
     <body className={inter.className}>
   
       <AuthProvider>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-full flex-col">
           <Navigation user={user} />
           <ToastProvider/>
           {/* サイドにスペースがいる場合それぞれのpage.tsxでやる */}
           {/* <main className=" px-10"> */}
-          <main className="">
+          <main className="bg-gray-100 min-h-screen">
             {children}
           </main>
         
