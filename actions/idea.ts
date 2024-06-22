@@ -167,3 +167,57 @@ export const getGenerateIdea = async ({accessToken,word}:PostCreateIdeaWithAITyp
 
   return { success: true, idea }
 }
+
+
+export interface NewsType {
+  id:string
+  title: string
+  content:string
+  updated_at: string
+
+}
+// お知らせの一覧を取得する
+export const getNews = async () => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    
+  }
+  const result = await fetchAPI(`/api/news/`, options)
+  
+  if (!result.success) {
+    console.error(result.error)
+    
+    return { success: false, news: null }
+  }
+
+  const news: [NewsType] = result.data
+  return { success: true, news }
+}
+
+
+
+export interface TagType {
+  id:string
+  title: string
+
+
+}
+//tagの一覧を取得する
+export const getTags = async () => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    
+  }
+  const result = await fetchAPI(`/api/tags/`, options)
+  
+  if (!result.success) {
+    console.error(result.error)
+    
+    return { success: false, tags: null }
+  }
+
+  const tags: [TagType] = result.data
+  return { success: true, tags }
+}

@@ -22,7 +22,7 @@ const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
     router.push(`/idea/${id}`)
   }
   return (
-    <div className="md:w-1/2 mx-auto">
+    <div className="w-full mx-auto">
         <div className=" list-disc  divide-y divide-gray-400">
             {ideas?.map((idea) => (
             <div 
