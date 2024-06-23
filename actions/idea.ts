@@ -173,7 +173,7 @@ export interface NewsType {
   id:string
   title: string
   content:string
-  updated_at: string
+  created_at: string
 
 }
 // お知らせの一覧を取得する
@@ -221,3 +221,25 @@ export const getTags = async () => {
   const tags: [TagType] = result.data
   return { success: true, tags }
 }
+
+
+export const getINewsDetail = async ({ newsId }: { newsId: string }) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    
+  }
+
+  // 投稿詳細取得
+  console.log(newsId)
+  const result = await fetchAPI(`/api/news/${newsId}/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false, data: null }
+  }
+  const data: NewsType = result.data
+
+  return { success: true, data }
+}
+

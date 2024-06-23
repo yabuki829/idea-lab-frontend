@@ -1,5 +1,5 @@
 import { getNews } from "@/actions/idea"
-
+import Link from "next/link"
 // サイドナビゲーション お知らせを表示する
 const RightSidebar = async () => {
 //   お知らせはadminから投稿する
@@ -10,9 +10,11 @@ const RightSidebar = async () => {
      <nav className="bg-white rounded-md p-4">
      {news?.map((data) => (
       <div key={data.id}>
-      <a className="px-2 py-1  text-gray-500 m-2" href="">
-        {data.title}
-        </a>
+    
+
+        <Link className="px-2 py-1  text-gray-500 m-2" href={"news/"+data.id}>
+          {data.title}
+        </Link>
         <hr />
       </div>
         
