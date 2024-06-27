@@ -47,11 +47,11 @@ const UserNavigation = ( { user }: UserNavigationProps ) => {
                     </DropdownMenuItem>
                 </Link>
 
-                <Link href="/post/new">
+                {/* <Link href="/post/new">
                     <DropdownMenuItem className="cursor-pointer">
                         新規投稿
                     </DropdownMenuItem>
-                </Link>
+                </Link> */}
 
                 <Link href="/settings/profile">
                     <DropdownMenuItem className="cursor-pointer">

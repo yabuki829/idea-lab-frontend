@@ -4,10 +4,10 @@ import { UserType } from "@/lib/nextauth"
 import { IdeaType } from "@/actions/idea"
 interface IdeaProps {
     idea: IdeaType | null
-    user: UserType
+    user: UserType 
 }
 import Image from "next/image"
-
+import Link from "next/link"
 const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
    
   const [isLoading, setIsLoading] = useState(false)
@@ -21,7 +21,12 @@ const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
           <br />
           <p>{idea?.description}</p>
           <br />
-          <button><p className="px-2  bg-gray-200 text-gray-600 rounded-md">{idea?.tag}</p></button>
+          <Link
+            href={"/tags/"+idea?.tag}
+            className="bg-green-300 text-gray-500 border border-gray-500 rounded-full px-2 py-1 text-xs"
+          >
+            {idea?.tag}
+          </Link>
           <div className="flex justify-end items-center ">
             <div className="relative w-10 h-10 flex-shrink-0 ">
               <Image src={idea?.user.image || "/default.png"}

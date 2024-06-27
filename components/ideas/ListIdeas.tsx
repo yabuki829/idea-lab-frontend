@@ -7,7 +7,7 @@ interface IdeaProps {
     user: UserType | null
 }
 import Image from "next/image"
-import toast from "react-hot-toast"
+import Link from "next/link"
 const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
    
   const router = useRouter()
@@ -21,6 +21,17 @@ const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
     // }
     router.push(`/idea/${id}`)
   }
+
+  if (ideas?.length == 0) {
+    return (
+      <div className="p-10">
+        <p className="text-center ">表示できるアイデアがありません</p>
+      
+      </div>
+    )
+  }
+
+
   return (
     <div className="w-full mx-auto">
         <div className=" list-disc  divide-y divide-gray-400">
@@ -49,7 +60,12 @@ const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
                 <h3 className="text-xl font-bold">{idea.title}</h3>
                 
                 <p className="mt-2">{idea.description}</p>
-                <button><p className="px-2  bg-gray-200 text-gray-600 rounded-md">{idea.tag}</p></button>
+                <Link
+                  href={"/tags/"+idea?.tag}
+                  className="bg-green-300 text-gray-500 border border-gray-500 rounded-full px-2 py-1 text-xs"
+                >
+                  {idea?.tag}
+                </Link>
             </div>
             
             ))}

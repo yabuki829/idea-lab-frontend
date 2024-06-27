@@ -11,7 +11,7 @@ const LeftSidebar = async () => {
         {tags?.map((tag) => (
           <Link
             key={tag.id}
-            href={""}
+            href={"/tags/"+tag.title}
             className="bg-green-300 text-gray-500 border border-gray-500 rounded-full px-2 py-1 text-xs"
           >
             {tag.title}

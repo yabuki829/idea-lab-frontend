@@ -243,3 +243,24 @@ export const getINewsDetail = async ({ newsId }: { newsId: string }) => {
   return { success: true, data }
 }
 
+
+
+
+export const getIdeaWithTag = async ({ tagTitle }: { tagTitle: string }) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    
+  }
+
+  // 投稿詳細取得
+  const result = await fetchAPI(`/api/tags/${tagTitle}/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { success: false, ideas: null }
+  }
+  const ideas: [IdeaType] = result.data
+
+  return { success: true, ideas}
+}

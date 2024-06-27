@@ -1,18 +1,24 @@
 import { getAuthSession } from "@/lib/nextauth"
 import ListIdeas from "@/components/ideas/ListIdeas"
-import { getIdeaList } from "@/actions/idea"
+import { getIdeaWithTag } from "@/actions/idea"
 import LeftSidebar from "@/components/ideas/LeftSidebar"
 import RightSidebar from "@/components/ideas/RightSidebar"
 
 
+interface TagIdeaListPageProps {
+    params: {
+      tagTitle: string
+    }
+  }
 
-
-const HomePage = async () => {
-  
-    const user = await getAuthSession()
-
+// 特定のタグの投稿のリストを表示する
+const TagIdeaListPage = async ({ params }: TagIdeaListPageProps) => {
     
-    const {success,ideas} = await getIdeaList() 
+    const user = await getAuthSession()
+    const { tagTitle } = params
+    console.log(tagTitle); // デバッグ用ログ
+    
+    const {success,ideas} = await getIdeaWithTag({tagTitle}) 
   
     if (!success) {
       return (
@@ -21,6 +27,7 @@ const HomePage = async () => {
       
       </div>)
     }
+
 
 
     return (
@@ -39,7 +46,7 @@ const HomePage = async () => {
     )
   }
   
-  export default HomePage
+  export default TagIdeaListPage
 
 
  
