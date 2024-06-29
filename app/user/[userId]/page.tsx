@@ -1,4 +1,5 @@
 import { getUserDetail } from "@/actions/user"
+import { getUserIdea } from "@/actions/idea"
 import UserDetail from "@/components/user/UserDetail"
 
 interface UserDetailPageProps {
@@ -14,6 +15,8 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
   console.log("userid:",userId)
   const { success, user } = await getUserDetail({ userId })
 
+  const { successUserIdea,ideas } = await getUserIdea({userId})
+
   if (!success) {
     return (
       <div className="text-center text-sm text-gray-500">
@@ -28,8 +31,9 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
       </div>
     )
   }
+
   
-  return <div className="p-5 md:p-10"><UserDetail user={user} /></div>
+  return <div className="p-5 md:p-10"><UserDetail user={user} ideas={ideas} /></div>
 }
 
 export default UserDetailPage

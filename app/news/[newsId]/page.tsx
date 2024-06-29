@@ -49,4 +49,4 @@ const DetailNewsPage = async ({ params }: NewsDetailPageProps) => {
     )
   }
   
-  export default DetailNewsPag
+  export default DetailNewsPage

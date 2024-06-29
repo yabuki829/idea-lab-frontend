@@ -1,24 +1,24 @@
 "use client"
 import { UserType } from "@/lib/nextauth"
 import { IdeaType } from "@/actions/idea"
+import { UserDetailType } from "@/actions/user"
 import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 interface IdeaProps {
     ideas: [IdeaType] | null
-    user: UserType | null
+    user: UserType | null | UserDetailType
 }
 import Image from "next/image"
 import Link from "next/link"
+
 const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
-   
   const router = useRouter()
-
-
   // TODO 詳細画面に行く際にuserがnullであればログインのアラートを表示する
   const handleDetailClick = (id: string) => {
-    // if (!user) {
-    //     toast.error("ログインすることで詳細を見ることができます。")
-    //   return
-    // }
+    if (!user) {
+        toast.error("ログインすることで詳細を見ることができます。")
+      return
+    }
     router.push(`/idea/${id}`)
   }
 
@@ -59,7 +59,7 @@ const ListIdeas =  ({ user,ideas }: IdeaProps) =>  {
                 </div>
                 <h3 className="text-xl font-bold">{idea.title}</h3>
                 
-                <p className="mt-2">{idea.description}</p>
+                {/* <p className="mt-2">{idea.description}</p> */}
                 <Link
                   href={"/tags/"+idea?.tag}
                   className="bg-green-300 text-gray-500 border border-gray-500 rounded-full px-2 py-1 text-xs"

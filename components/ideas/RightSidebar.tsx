@@ -12,7 +12,7 @@ const RightSidebar = async () => {
       <div key={data.id}>
     
 
-        <Link className="px-2 py-1  text-gray-500 m-2" href={"news/"+data.id}>
+        <Link className="px-2 py-1  text-gray-500 m-2" href={"/news/"+data.id}>
           {data.title}
         </Link>
         <hr />

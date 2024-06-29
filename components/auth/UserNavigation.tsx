@@ -43,15 +43,11 @@ const UserNavigation = ( { user }: UserNavigationProps ) => {
                 <DropdownMenuSeparator />
                 <Link href="/create/ideas">
                     <DropdownMenuItem className="cursor-pointer">
-                        アイデア生成
+                        新規投稿
                     </DropdownMenuItem>
                 </Link>
 
-                {/* <Link href="/post/new">
-                    <DropdownMenuItem className="cursor-pointer">
-                        新規投稿
-                    </DropdownMenuItem>
-                </Link> */}
+                
 
                 <Link href="/settings/profile">
                     <DropdownMenuItem className="cursor-pointer">
@@ -59,7 +55,7 @@ const UserNavigation = ( { user }: UserNavigationProps ) => {
                     </DropdownMenuItem>
                 </Link>
 
-                <DropdownMenuItem onSelect={async () => { await signOut({ callbackUrl: "/" })}} className="text-red-600 cursor-pointer">
+                <DropdownMenuItem onSelect={async () => { await signOut({ callbackUrl: "/" })}} className=" cursor-pointer bg-gray-300 text-black">
                     ログアウト
                 </DropdownMenuItem>
 

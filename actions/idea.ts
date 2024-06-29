@@ -89,12 +89,18 @@ export const postIdea = async ({
 // アイデアの詳細の取得
 // 引数: ideaId
 
-export const getIdeaDetail = async ({ ideaId }: { ideaId: string }) => {
+export const getIdeaDetail = async ({ ideaId,token }: { ideaId: string, token:string|undefined }) => {
   const options: RequestInit = {
     method: "GET",
     cache: "no-store",
     
+    headers: {
+      Authorization: `JWT ${token}`,
+      "Content-Type": "application/json",
+    }
+    
   }
+
 
   // 投稿詳細取得
   const result = await fetchAPI(`/api/idea/${ideaId}/`, options)
@@ -263,4 +269,46 @@ export const getIdeaWithTag = async ({ tagTitle }: { tagTitle: string }) => {
   const ideas: [IdeaType] = result.data
 
   return { success: true, ideas}
+}
+
+// 自分のアイデアを取得する
+export const getUserIdea = async ({ userId }: { userId: string }) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    
+  }
+
+  // 投稿詳細取得
+  const result = await fetchAPI(`/api/user/${userId}/idea/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { successUserIdea: false, ideas: null }
+  }
+  const ideas: [IdeaType] = result.data
+
+  return { successUserIdea: true, ideas}
+}
+
+export const getRecommendedIdeas= async ({ accessToken }: { accessToken:string|undefined}) => {
+  const options: RequestInit = {
+    method: "GET",
+    cache: "no-store",
+    headers: {
+      Authorization: `JWT ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  }
+
+  // 投稿詳細取得
+  const result = await fetchAPI(`/api/idea/recommend/`, options)
+
+  if (!result.success) {
+    console.error(result.error)
+    return { successRecommendIdea: false, recommendedIdeas: null }
+  }
+  const recommendedIdeas: [IdeaType] = result.data
+
+  return { successRecommendIdea: true, recommendedIdeas}
 }

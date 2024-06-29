@@ -3,7 +3,9 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
 import DetailsIdeas from "@/components/ideas/DetailIdeas"
-import { getIdeaDetail } from "@/actions/idea"
+import { getIdeaDetail,getRecommendedIdeas } from "@/actions/idea"
+import ListIdeas from "@/components/ideas/ListIdeas"
+import LeftSidebar from "@/components/ideas/LeftSidebar"
 
 
 interface PostDetailPageProps {
@@ -17,12 +19,12 @@ const DetailsIdeaPage = async ({ params }: PostDetailPageProps) => {
 
     const user = await getAuthSession()
   
-    if (!user) {
-      redirect("/login")
-    }
-  
-    const {success,idea} = await getIdeaDetail({ideaId})
-
+    // if (!user) {
+    //   redirect("/login")
+    // }
+    
+    const {success,idea} = await getIdeaDetail({ideaId,token:user?.accessToken} )
+    const {successRecommendIdea,recommendedIdeas} = await getRecommendedIdeas( {accessToken: user?.accessToken} )
 
     // 失敗した場合
     if (!success) {
@@ -41,12 +43,18 @@ const DetailsIdeaPage = async ({ params }: PostDetailPageProps) => {
     
     
     return (
-      <div className="p-5 md:p-10 ">
+      <div className=" flex flex-col space-y-8 md:flex-row md:space-x-12 md:space-y-0  md:p-10">
+         <div className="hidden md:block md:w-1/6">
+          <LeftSidebar/>
+        </div>
         
+          <div className="flex-1">
           <DetailsIdeas idea={idea} user={user}/>
-        
-        
-        
+          </div>
+          <div className="w-full md:w-1/4 bg-white">
+            <h1 className="text-center  font-bold text-black bg-blue-100">おすすめの投稿</h1>
+          <ListIdeas ideas={recommendedIdeas} user={user}/>
+          </div>
       </div>
     )
   }

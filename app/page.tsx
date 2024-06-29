@@ -14,13 +14,13 @@ const HomePage = async () => {
     
     const {success,ideas} = await getIdeaList() 
   
-    if (!success) {
-      return (
-      <div className="p-10">
-        <p className="text-center ">取得に失敗しました</p>
+    // if (!success) {
+    //   return (
+    //   <div className="p-10">
+    //     <p className="text-center ">取得に失敗しました</p>
       
-      </div>)
-    }
+    //   </div>)
+    // }
 
 
     return (
