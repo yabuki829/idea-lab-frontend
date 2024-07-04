@@ -116,23 +116,21 @@ export const getIdeaDetail = async ({ ideaId,token }: { ideaId: string, token:st
 
 
 // 一覧を取得する
-export const getIdeaList = async () => {
+export const getIdeaList = async (page: number) => {
   const options: RequestInit = {
     method: "GET",
     cache: "no-store",
-    
-  }
-  const result = await fetchAPI(`/api/idea/list/`, options)
+  };
+  const result = await fetchAPI(`/api/idea/list/?page=${page}`, options);
   
   if (!result.success) {
-    console.error(result.error)
-    
-    return { success: false, ideas: null }
+    console.error(result.error);
+    return { success: false, ideas: [] };
   }
 
-  const ideas: [IdeaType] = result.data
-  return { success: true, ideas }
-}
+  const ideas: IdeaType[] = result.data.results;
+  return { success: true, ideas };
+};
 
 
 // アイデアの自動生成

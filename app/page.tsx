@@ -3,6 +3,7 @@ import ListIdeas from "@/components/ideas/ListIdeas"
 import { getIdeaList } from "@/actions/idea"
 import LeftSidebar from "@/components/ideas/LeftSidebar"
 import RightSidebar from "@/components/ideas/RightSidebar"
+import ListIdeasWrapper from "@/components/ideas/ListIdeaWrapper"
 
 
 
@@ -12,15 +13,15 @@ const HomePage = async () => {
     const user = await getAuthSession()
 
     
-    const {success,ideas} = await getIdeaList() 
+    const {success,ideas} = await getIdeaList(1) 
   
-    // if (!success) {
-    //   return (
-    //   <div className="p-10">
-    //     <p className="text-center ">取得に失敗しました</p>
+    if (!success) {
+      return (
+      <div className="p-10">
+        <p className="text-center ">取得に失敗しました</p>
       
-    //   </div>)
-    // }
+      </div>)
+    }
 
 
     return (
@@ -30,7 +31,7 @@ const HomePage = async () => {
          
         </div>
         <div className="flex-1 ">
-          <ListIdeas ideas={ideas} user={user}/>
+        <ListIdeasWrapper initialIdeas={ideas} user={user} />
         </div>
         <div className="w-full md:w-1/4">
           <RightSidebar/>
