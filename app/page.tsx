@@ -25,7 +25,7 @@ const HomePage = async () => {
 
 
     return (
-      <div className=" flex flex-col space-y-8 md:flex-row md:space-x-12 md:space-y-0  md:p-10">
+      <div className=" flex flex-col  md:flex-row md:space-x-12 space-y-0  md:p-10">
          <div className="hidden md:block  md:w-1/6">
           <LeftSidebar/>
          

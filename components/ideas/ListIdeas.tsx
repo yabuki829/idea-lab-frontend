@@ -41,16 +41,19 @@ const ListIdeas = ({ user, ideas }: IdeaProps) => {
             className="cursor-pointer bg-white p-5"
             onClick={() => handleDetailClick(idea.id)}
           >
-            <div className="flex items-center">
-              <Image
-                src={idea.user.image || "/default.png"}
-                alt={idea.user.name}
-                width={50}
-                height={50}
-                className="rounded-full mr-4"
-              />
-              <h3 className="text-xl font-bold">{idea.user.name}</h3>
-            </div>
+         <div className="flex items-center">
+          <Image
+            src={idea.user.image || "/default.png"}
+            alt={idea.user.name}
+            width={50}
+            height={50}
+            className="rounded-full mr-4 object-cover"
+            style={{ width: '50px', height: '50px' }} 
+          />
+          <h3 className="text-xl font-bold">{idea.user.name}</h3>
+        </div>
+
+
             <h3 className="text-xl font-bold">{idea.title}</h3>
             <Link
               href={"/tags/" + idea.tag}

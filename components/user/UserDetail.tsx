@@ -12,18 +12,18 @@ interface UserDetailProps {
 
 const UserDetail = ({ user ,ideas }: UserDetailProps) => {
   return (
-    <div className="w-5/6 mx-auto flex flex-col space-y-8 md:flex-row md:space-x-12 md:space-y-0   ">
+    <div className="w-full md:w-5/6 mx-auto flex flex-col md:flex-row md:space-x-12 space-y-0   ">
       <div className="bg-white p-5 rounded-md w-full md:w-1/3">
        
-        
           <div className="flex justify-center">
           <Image
-                      src={user.image || "/default.png"}
-                      alt={user.name}
-                      width={100}
-                      height={100}
-                      className="rounded-full "
-                      />
+            src={user.image || "/default.png"}
+            alt={user.name}
+            width={100}
+            height={100}
+            className="rounded-full mr-4 object-cover"
+            style={{ width: '100px', height: '100px' }} 
+          />
           </div>
                   
        
@@ -40,7 +40,7 @@ const UserDetail = ({ user ,ideas }: UserDetailProps) => {
       </div>
      
     <br />
-
+   
     <ListIdeas ideas={ideas} user={user}/>
     </div>
 
