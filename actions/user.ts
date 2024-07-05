@@ -1,6 +1,6 @@
 "use server"
 const fetchAPI = async (url: string, options: RequestInit) => {
-  const backendUrl = process.env.API_URL
+  const backendUrl = process.env.BACKEND_URL
   try {
     console.log(backendUrl,url)
     const response = await fetch(`${backendUrl}${url}`, options)

@@ -3,7 +3,7 @@ import { UserType } from "@/lib/nextauth"
 // アイデアの投稿や編集、アイデアへのコメントを行うメソッドをまとめたファイル
 
 const fetchAPI = async (url: string, options: RequestInit) => {
-  const backendUrl = process.env.API_URL
+  const backendUrl = process.env.BACKEND_URL
 
   try {
     console.log(backendUrl,)

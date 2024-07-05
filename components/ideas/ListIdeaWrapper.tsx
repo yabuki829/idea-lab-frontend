@@ -10,7 +10,7 @@ interface ListIdeasWrapperProps {
     user: UserType | null;
   }
   
-  const ListIdeasWrapper: React.FC<ListIdeasWrapperProps> = ({ initialIdeas, user }) => {
+const ListIdeasWrapper: React.FC<ListIdeasWrapperProps> = ({ initialIdeas, user }) => {
     const [ideas, setIdeas] = useState<IdeaType[]>(initialIdeas);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -49,4 +49,4 @@ interface ListIdeasWrapperProps {
     );
   };
   
-  export default ListIdeasWrapper;
+export default ListIdeasWrapper;
