@@ -32,7 +32,7 @@ export interface UserType {
 
 // 共通のAPIリクエスト
 const fetchAPI = async (url: string, options: RequestInit) => {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.BACKEND_URL
 
   if (!apiUrl) {
     throw new Error("API URLが設定されていません")

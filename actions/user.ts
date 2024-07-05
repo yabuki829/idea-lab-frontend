@@ -55,7 +55,7 @@ export const temporarrySingup = async ({
       body,
     };
     // アカウント仮登録を送信
-    const apiResponse = await fetch(`${process.env.API_URL}/api/auth/users/`, options);
+    const apiResponse = await fetch(`${process.env.BACKEND_URL}/api/auth/users/`, options);
     
     if (!apiResponse.ok) {
       const errorResponse = await apiResponse.json();
