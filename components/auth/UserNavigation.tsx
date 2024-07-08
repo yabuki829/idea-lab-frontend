@@ -55,7 +55,7 @@ const UserNavigation = ( { user }: UserNavigationProps ) => {
                     </DropdownMenuItem>
                 </Link>
 
-                <DropdownMenuItem onSelect={async () => { await signOut({ callbackUrl: "/" })}} className=" cursor-pointer bg-gray-300 text-black">
+                <DropdownMenuItem onSelect={async () => { await signOut({ callbackUrl: "https://idea-kenkyujo.com/login" })}} className=" cursor-pointer bg-gray-300 text-black">
                     ログアウト
                 </DropdownMenuItem>
 

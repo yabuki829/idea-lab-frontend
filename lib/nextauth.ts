@@ -117,12 +117,17 @@ export const authOptions: NextAuthOptions = {
         return authorizeUser(credentials.email, credentials.password)
       },
     }),
+    
+    
   ],
   // セッションの設定
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signOut: '/login', // ログアウト後のリダイレクト先
+  },
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: any }) {
       if (user) {

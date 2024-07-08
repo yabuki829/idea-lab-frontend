@@ -21,7 +21,7 @@ const ListIdeasWrapper: React.FC<ListIdeasWrapperProps> = ({ initialIdeas, user 
       const loadIdeas = async () => {
         setLoading(true);
         const { success, ideas: newIdeas } = await getIdeaList(page);
-        alert(success)
+        
         if (success) {
           setIdeas(prevIdeas => [...prevIdeas, ...newIdeas]);
           setHasMore(newIdeas.length > 0);
