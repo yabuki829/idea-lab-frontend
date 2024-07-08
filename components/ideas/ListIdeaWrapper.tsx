@@ -21,10 +21,15 @@ const ListIdeasWrapper: React.FC<ListIdeasWrapperProps> = ({ initialIdeas, user 
       const loadIdeas = async () => {
         setLoading(true);
         const { success, ideas: newIdeas } = await getIdeaList(page);
+        alert(success)
         if (success) {
           setIdeas(prevIdeas => [...prevIdeas, ...newIdeas]);
           setHasMore(newIdeas.length > 0);
         }
+        else{
+          setHasMore(false)
+        }
+
         setLoading(false);
       };
       loadIdeas();
@@ -37,14 +42,15 @@ const ListIdeasWrapper: React.FC<ListIdeasWrapperProps> = ({ initialIdeas, user 
     return (
       <div>
         <ListIdeas ideas={ideas} user={user} />
+        
         {hasMore && (
-          <div className="flex justify-center mt-4">
-            <button onClick={handleLoadMore} className="btn">
+          <div className="flex justify-center my-4">
+            <button onClick={handleLoadMore} className="bg-white border-2 rounded-full py-3 px-2">
               もっと見る
             </button>
           </div>
         )}
-        {loading && <p className="text-center">読み込み中...</p>}
+       
       </div>
     );
   };
