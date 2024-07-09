@@ -136,7 +136,6 @@ export const getIdeaList = async (page: number) => {
 // アイデアの自動生成
 
 interface CreateIdeaWithAIType {
-
   title: string
   description:string
 }
@@ -172,6 +171,45 @@ export const getGenerateIdea = async ({accessToken,word}:PostCreateIdeaWithAITyp
   return { success: true, idea }
 }
 
+export interface  MonetizeIdeaType  {
+  idea:IdeaType
+  description:string
+}
+
+// アイデアのマネタイズを取得する　monetization
+export const getMonetizeIdea = async ({ accessToken, id, isGet }: { accessToken: string | undefined, id: string, isGet: boolean }) => {
+  let url = "/api/generate/monetization/"
+  let options = {}
+  if (isGet) {
+      url += `?id=${id}`  // URLパラメータとしてidを追加
+      options = {
+          method: "GET",
+          headers: {
+              Authorization: `JWT ${accessToken}`,
+              "Content-Type": "application/json",
+          }
+      }
+  } else {
+      options = {
+          method: "POST",
+          headers: {
+              Authorization: `JWT ${accessToken}`,
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+      }
+  }
+
+  const result = await fetchAPI(url, options)
+
+  if (!result.success) {
+      console.error(result.error)
+      return { successMonetize: false, post: null }
+  }
+
+  const post: MonetizeIdeaType = result.data
+  return { successMonetize: true, post }
+}
 
 export interface NewsType {
   id:string

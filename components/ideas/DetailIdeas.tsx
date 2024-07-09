@@ -6,11 +6,13 @@ interface IdeaProps {
     idea: IdeaType | null
     user: UserType |null
 }
+import { getMonetizeIdea } from "@/actions/idea"
 import Image from "next/image"
 import Link from "next/link"
 const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
    
   const [isLoading, setIsLoading] = useState(false)
+  
   
   return (
     <div className="w-full mx-auto bg-white  rounded-md p-5  md:p-10">
@@ -41,6 +43,7 @@ const DetailsIdeas =  ({ user,idea }: IdeaProps) =>  {
           </div>
          
         </div>
+       
         
        
     </div>

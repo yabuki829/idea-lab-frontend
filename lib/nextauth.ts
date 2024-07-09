@@ -126,7 +126,7 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signOut: '/login', // ログアウト後のリダイレクト先
+    signOut: '/login', 
   },
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: any }) {
