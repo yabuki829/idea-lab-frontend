@@ -10,6 +10,8 @@ interface MonetizeProps {
 import toast from "react-hot-toast"
 import { getMonetizeIdea } from "@/actions/idea"
 import Loading from "@/app/loading"
+import ReactMarkdown from 'react-markdown'
+
 
 const ShowManetizeIdea =  ({ user,monetize: initialMonetize,idea }: MonetizeProps) =>  {
    
@@ -67,7 +69,7 @@ const ShowManetizeIdea =  ({ user,monetize: initialMonetize,idea }: MonetizeProp
     <div className="w-full mx-auto bg-white  rounded-md p-5  md:p-10 my-5 md:my-10">
         <div>
           <h1 className="text-2xl font-bold">AIが生成したマネタイズ方法</h1>
-            <h1>{monetize.description}</h1>
+                <ReactMarkdown>{monetize.description}</ReactMarkdown>
         </div>
        
         
